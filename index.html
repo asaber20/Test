@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ChatApp</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💬</text></svg>" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" id="sidebar">
+      <header class="sidebar-header">
+        <div class="avatar me">Me</div>
+        <h1>Chats</h1>
+      </header>
+      <div class="search">
+        <input id="search" type="search" placeholder="Search or start new chat" aria-label="Search chats" />
+      </div>
+      <ul class="chat-list" id="chat-list" role="listbox" aria-label="Chat list"></ul>
+    </aside>
+
+    <main class="conversation" id="conversation">
+      <header class="chat-header">
+        <button class="back" id="back" aria-label="Back to chats">&#8249;</button>
+        <div class="avatar" id="peer-avatar">B</div>
+        <div class="peer">
+          <span class="peer-name" id="peer-name">Bot</span>
+          <span class="peer-status" id="peer-status">online</span>
+        </div>
+        <button class="clear" id="clear" title="Clear this chat">Clear</button>
+      </header>
+
+      <div class="messages" id="messages" aria-live="polite"></div>
+
+      <form class="composer" id="composer" autocomplete="off">
+        <input id="input" type="text" placeholder="Type a message" aria-label="Message" />
+        <button type="submit" id="send" aria-label="Send message">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z" fill="currentColor"/></svg>
+        </button>
+      </form>
+    </main>
+  </div>
+
+  <script src="bot.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
