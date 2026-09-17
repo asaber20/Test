@@ -1,4 +1,5 @@
 :root {
+  color-scheme: dark;
   --bg: #0b141a;
   --panel: #111b21;
   --panel-2: #202c33;
@@ -25,7 +26,7 @@ html, body {
 
 .app {
   display: flex;
-  height: 100vh;
+  height: 100%;
   max-width: 1400px;
   margin: 0 auto;
   background: var(--panel);
@@ -318,6 +319,6 @@ html, body {
   .app.chat-open .sidebar { display: none; }
   .app.chat-open .conversation { display: flex; }
   .back { display: block; }
-  .messages { padding: 14px 12px 10px; }
+  .messages { padding: 14px 16px 10px; }
   .bubble { max-width: 82%; }
 }
