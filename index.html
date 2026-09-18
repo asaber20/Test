@@ -2,47 +2,104 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ChatApp</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💬</text></svg>" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Revenue Analysis</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>" />
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="app">
-    <aside class="sidebar" id="sidebar">
-      <header class="sidebar-header">
-        <div class="avatar me">Me</div>
-        <h1>Chats</h1>
-      </header>
-      <div class="search">
-        <input id="search" type="search" placeholder="Search or start new chat" aria-label="Search chats" />
+<div class="page">
+
+  <header class="topbar">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="2" y="13" width="4.5" height="9" rx="1.5"/>
+        <rect x="9.75" y="7" width="4.5" height="15" rx="1.5"/>
+        <rect x="17.5" y="2" width="4.5" height="20" rx="1.5"/>
+      </svg>
+      <div class="brand-text">
+        <h1>Revenue Analysis</h1>
+        <p class="brand-sub">Billing documents · <span id="period-label">—</span></p>
       </div>
-      <ul class="chat-list" id="chat-list" role="listbox" aria-label="Chat list"></ul>
-    </aside>
+    </div>
+    <div class="topbar-actions">
+      <span class="source-badge" id="source-badge">Demo data</span>
+      <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch colour theme" title="Switch colour theme">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z" fill="currentColor"/></svg>
+      </button>
+    </div>
+  </header>
 
-    <main class="conversation" id="conversation">
-      <header class="chat-header">
-        <button class="back" id="back" aria-label="Back to chats">&#8249;</button>
-        <div class="avatar" id="peer-avatar">B</div>
-        <div class="peer">
-          <span class="peer-name" id="peer-name">Bot</span>
-          <span class="peer-status" id="peer-status">online</span>
+  <section class="filters" aria-label="Filters">
+    <div class="filter-row">
+      <label class="field">
+        <span class="field-label">Period</span>
+        <select id="f-period">
+          <option value="6">Last 6 months</option>
+          <option value="12" selected>Last 12 months</option>
+          <option value="24">Last 24 months</option>
+        </select>
+      </label>
+      <label class="field">
+        <span class="field-label">Compare to</span>
+        <select id="f-compare">
+          <option value="year" selected>Same period last year</option>
+          <option value="prior">Preceding period</option>
+        </select>
+      </label>
+      <div class="field" id="f-vkorg"></div>
+      <div class="field" id="f-vtweg"></div>
+      <div class="field" id="f-matkl"></div>
+      <button class="ghost-btn" id="f-reset" type="button">Reset</button>
+    </div>
+    <div class="chips" id="chips" aria-live="polite"></div>
+  </section>
+
+  <main id="main">
+
+    <section class="card headline" aria-label="Headline figures">
+      <div class="hero">
+        <p class="hero-label">Net revenue</p>
+        <p class="hero-value" id="hero-value">—</p>
+        <p class="hero-delta" id="hero-delta"></p>
+        <p class="hero-note" id="hero-note"></p>
+      </div>
+      <div class="kpis" id="kpis"></div>
+    </section>
+
+    <section class="card insights-card" aria-labelledby="insights-title">
+      <div class="card-head">
+        <div>
+          <h2 id="insights-title">What changed</h2>
+          <p class="card-sub">Generated from the selected slice · select a card to drill in</p>
         </div>
-        <button class="clear" id="clear" title="Clear this chat">Clear</button>
-      </header>
+      </div>
+      <div class="insights" id="insights"></div>
+    </section>
 
-      <div class="messages" id="messages" aria-live="polite"></div>
+    <section class="card chart-card" id="card-trend" aria-labelledby="trend-title"></section>
 
-      <form class="composer" id="composer" autocomplete="off">
-        <input id="input" type="text" placeholder="Type a message" aria-label="Message" />
-        <button type="submit" id="send" aria-label="Send message">
-          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z" fill="currentColor"/></svg>
-        </button>
-      </form>
-    </main>
-  </div>
+    <div class="two-col">
+      <section class="card chart-card" id="card-matkl" aria-labelledby="matkl-title"></section>
+      <section class="card chart-card" id="card-channel" aria-labelledby="channel-title"></section>
+    </div>
 
-  <script src="bot.js"></script>
-  <script src="app.js"></script>
+    <section class="card chart-card" id="card-org" aria-labelledby="org-title"></section>
+
+  </main>
+
+  <footer class="page-foot">
+    <p id="foot-note">Demo dataset — figures are generated, not booked revenue.</p>
+  </footer>
+</div>
+
+<div class="tooltip" id="tooltip" role="status" aria-live="polite" hidden></div>
+
+<script src="config.js"></script>
+<script src="data.js"></script>
+<script src="api.js"></script>
+<script src="analytics.js"></script>
+<script src="charts.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
